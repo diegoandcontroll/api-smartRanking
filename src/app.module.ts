@@ -4,12 +4,14 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { JogadoresModule } from './jogadores/jogadores.module';
 @Module({
   imports: [
-    MongooseModule.forRoot(process.env.MONGO_URL, {
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+    MongooseModule.forRoot(`${process.env.MONGO_URL}` as string, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     }),
     JogadoresModule,
-    ConfigModule.forRoot(),
   ],
   controllers: [],
   providers: [],
